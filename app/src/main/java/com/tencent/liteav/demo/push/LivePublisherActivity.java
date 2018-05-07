@@ -77,7 +77,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//todo 推流 就是形成一个播放地址 。。直播的时候把视频信息放到这个地址里面去。
+//todo 推流  其中就有录屏的过程中 就是形成一个播放地址 。。直播的时候把视频信息放到这个地址里面去。
 public class LivePublisherActivity extends Activity implements View.OnClickListener, ITXLivePushListener, BeautySettingPannel.IOnBeautyParamsChangeListener/*, ImageReader.OnImageAvailableListener*/ {
     private static final String TAG = LivePublisherActivity.class.getSimpleName();
 

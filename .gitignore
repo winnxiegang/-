@@ -1,0 +1,9 @@
+app/build/tmp/expandedArchives/xstream-1.4.7.jar_ad3zxxarv9tzqh2j2jhqa1ipd/com/thoughtworks/xstream/converters/reflection/CGLIBEnhancedConverter$CGLIBFilteringReflectionProvider$1.class
+app/build/tmp/expandedArchives/xstream-1.4.7.jar_ad3zxxarv9tzqh2j2jhqa1ipd/com/thoughtworks/xstream/converters/reflection/CGLIBEnhancedConverter$ReverseEngineeringInvocationHandler.class
+app/build/tmp/expandedArchives/xstream-1.4.7.jar_ad3zxxarv9tzqh2j2jhqa1ipd/com/thoughtworks/xstream/converters/reflection/SerializableConverter$UnserializableParentsReflectionProvider$1.class
+app/build/tmp/expandedArchives/xstream-1.4.7.jar_ad3zxxarv9tzqh2j2jhqa1ipd/com/thoughtworks/xstream/converters/reflection/SerializableConverter$UnserializableParentsReflectionProvider.class
+.gradle/
+.idea/
+app/build/
+/
+Demo.iml
