@@ -241,6 +241,11 @@ public class LiveRoomActivity extends CommonAppCompatActivity implements LiveRoo
                                     }
                                 };
                             } else {
+//                                {"code":0,"message":"请求成功","userID":"自己定义的用户名","sdkAppID":1400047134,"accType":"18647",
+//                                        "userSig":"eJyrVgrxCdZLLCjITIlPLIk3LkpRslIyNDEwMDAxNzQ2UdKByCcn55fmlcSXVBakguQtzEzMoVKZKal5JZlpmalFQIkX7auebt-" +
+//                                        "4dN2sJzs7n89qeT5lxbOO7U8n9ELVFqdkx4OtwmZHSWYu2GxTI1Mzc3NLQwuoeGpFQWZRanxiWgnYCiNTSyOgTpiJmelAMV-XQGdPx6xQjxILg1DL" +
+//                                        "wBSPcvfUbJf0wML84GyTKMPK1Kqw3Moow8ws94J8DyOjcsdMp-I0Y48k08IoA-eKjJy0RIPwvPBI75TwSmNfXx8TD1-LPFcL92B-J-OSqnJbW6VaALiUYgI_"}
+                                Log.d("login", strBody + "/ login ");
                                 SharedPreferences sp = getSharedPreferences("com.tencent.demo", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("userID", resp.userID);
@@ -282,12 +287,6 @@ public class LiveRoomActivity extends CommonAppCompatActivity implements LiveRoo
         loginInfo.accType = resp.accType;
         loginInfo.userName = userName;
         loginInfo.userAvatar = userAvatar;
-        Log.d("login", resp.sdkAppID + "");
-        Log.d("login", resp.userID + "");
-        Log.d("login", resp.userSig + "");
-        Log.d("login", resp.accType + "");
-        Log.d("login", userName + "");
-        Log.d("login", userAvatar + "");
         liveRoom.login(BaseRoom.ROOM_SERVICE_DOMAIN + "live_room", loginInfo, new LiveRoom.LoginCallback() {
             @Override
             public void onError(int errCode, String errInfo) {

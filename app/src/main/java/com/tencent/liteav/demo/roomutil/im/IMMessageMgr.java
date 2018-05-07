@@ -120,7 +120,7 @@ public class IMMessageMgr implements TIMMessageListener {
     }
 
     /**
-     * 初始化
+     *  拿到后台返还的信息初始化
      * @param userID    用户ID
      * @param userSig   签名
      * @param appID     appID

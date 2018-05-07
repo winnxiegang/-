@@ -6,6 +6,7 @@ import android.os.HandlerThread;
 import android.os.Bundle;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -35,6 +36,7 @@ import java.util.Iterator;
 
 /**
  * Created by dennyfeng on 2017/12/8.
+ * todo 初始化 登录相关信息
  */
 
 public abstract class BaseRoom implements IMMessageMgr.IMMessageListener {
@@ -70,14 +72,21 @@ public abstract class BaseRoom implements IMMessageMgr.IMMessageListener {
         mHeartBeatThread = new HeartBeatThread();
     }
 
+    /**
+     * 统一封装的 基类 向后台请求数据后 再进行注册IM SDK 使用
+     *
+     * @param serverDomain
+     * @param loginInfo
+     * @param callback
+     */
     public void login(String serverDomain, final LoginInfo loginInfo, final IMMessageMgr.Callback callback) {
         if (mHttpRequest != null) {
             mHttpRequest.cancelAllRequests();
             mHttpRequest = null;
         }
         mHttpRequest = new HttpRequests(serverDomain);
-
         mHttpRequest.login(loginInfo.sdkAppID, loginInfo.accType, loginInfo.userID, loginInfo.userSig, new HttpRequests.OnResponseCallback<HttpResponse.LoginResponse>() {
+
             @Override
             public void onResponse(int retcode, @Nullable String retmsg, @Nullable HttpResponse.LoginResponse data) {
                 if (retcode == 0 && data != null) {
@@ -87,12 +96,11 @@ public abstract class BaseRoom implements IMMessageMgr.IMMessageListener {
                     mAppID = loginInfo.sdkAppID;
                     mSelfAccountInfo = new SelfAccountInfo(data.userID, loginInfo.userName, loginInfo.userAvatar, loginInfo.userSig, loginInfo.accType, loginInfo.sdkAppID);
 
-                    // 初始化IM SDK，内部完成login
+                    // 初始化IM SDK，内部完成login 用户id 后台请求的签名 sdk申请的id
                     if (mIMMessageMgr != null) {
                         mIMMessageMgr.initialize(mSelfAccountInfo.userID, mSelfAccountInfo.userSig, (int)mSelfAccountInfo.sdkAppID, callback);
                     }
-                }
-                else {
+                } else {
                     callback.onError(-1, "RoomServer登录失败");
                 }
             }

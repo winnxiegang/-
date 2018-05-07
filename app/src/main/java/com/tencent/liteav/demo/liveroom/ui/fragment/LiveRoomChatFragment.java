@@ -292,7 +292,7 @@ public class LiveRoomChatFragment extends Fragment implements BeautySettingPanne
             mActivityInterface.getLiveRoom().setPauseImage(BitmapFactory.decodeResource(getResources(), R.drawable.pause_publish));
             mActivityInterface.getLiveRoom().setBeautyFilter(mBeautyStyle, mBeautyLevel, mWhiteningLevel, mRuddyLevel);
             mActivityInterface.getLiveRoom().setMute(mPusherMute);
-            //todo roomID  xieang_id 可以暂时写死 正常是 后台动态分配的
+            //todo roomID  xieang_id 可以暂时写死 正常是 后台动态分配的 或者上个界面传入的
             mActivityInterface.getLiveRoom().createRoom(mRoomInfo.roomID, mRoomInfo.roomInfo, new LiveRoom.CreateRoomCallback() {
                 @Override
                 public void onSuccess(String roomId) {
@@ -399,7 +399,34 @@ public class LiveRoomChatFragment extends Fragment implements BeautySettingPanne
         }
     }
 
+    /**
+     * 中国移动  161K/s n O HD 会bGrull 87% @1下午3:59[15:55:41] [M] connect success,initialize,time cost 0.25 secs
+     * [15:55:41] [IM] online  谢刚
+     * [15:55:43] [LiveRoom] 登录成功，userID自己定义的用户名}，sdkApplD{1400047134}
+     * [15:55:43] [Activity]LiveRoom初始化成功,userlD{自己定义的用户名}[15:55:43] [IM] login success,time cost 1.25 secs[15:55:43] [IM] login success
+     * [15:55:51] [BaseRoom] startLocalPreview[15:55:51][BaseRoom] onResume
+     * [15:55:51] [BaseRoom]
+     * // todo 直播管理 appid: 1253996937	 bizid : 23493 概述 - API中心 - 腾讯云文档平台 - 腾讯云  https://cloud.tencent.com/document/api/267/5956#.E5.AE.89.E5.85.A8.E6.A3.80.E6.9F.A5
+     * //todo 推流地址 是 动态拼接的  3891_自己定义的用户名 分别是bizid 和用户的uesid txSecret  txTime　 这是推流防盗链的生成 KEY+ streamId + txTime
+     * <p>
+     * 开始推流PushUrl = rtmp://3891.livepush.qclouc/live/3891_自己定义的用户名?bizid=3891&txSecret=3ee43b698831977ba120dcedf79ace6b&txTime=5AF94109[15:55:52] [BaseRoom] 推流成功
+     * [15:55:52] [BaseRoom] 创建直播间lD{xiegang_id_test} 成功[15:55:53] [BaseRoom] Enter Room 成功
+     * [15:55:53] [IM] 加入群{xiegang_id_test} 成功
+     * [15:55:53] [IM] onNewMessage type= GroupTips[15:55:53] [IM] onNewMessage type= GroupSystem[15:56:40] [BaseRoom] onPause
+     * [15;56:40] [IM] 退出群{xiegang_id_test} 成功
+     * [15:56:40] [IM] onNewMessage type= GroupSystem[15:56:41] [LiveRoom] 解散群成功
+     * [15:58:56] [BaseRoom] startLocalPreview[15:58:56] [BaseRoom] onResume
+     * [15:58:56] [BaseRoom] 开始推流PushUrl=
+     * rtmp://3891.livepush.myqcloud.comie/8自己定义的用户名?
+     * bizid=3891&txSecret=f97a4d4cf3889986185284c9217afe&txTime=5AF941C2[15:58:57] [BaseRoom] 推流成功
+     * [15:58:57] [BaseRoom] 创建直播间lD{xiegang_id_test} 成功[15:58:58] [BaseRoom] Enter Room 成功
+     * [15:58:58] [IM] 加入群{xiegang_id_test} 成功
+     * [15:58:58] [IM] onNewMessage type= GroupTips[15:58:58] [IM] onNewMessage type= GroupSystem[15:59:05] [IM] onNewMessage type= GroupTips
+     * (  0  &  Log
+     * <  口
+     */
     private void switchLog() {
+
         mShowLogFlag++;
         mShowLogFlag = (mShowLogFlag % 3);
         switch (mShowLogFlag) {
@@ -462,6 +489,7 @@ public class LiveRoomChatFragment extends Fragment implements BeautySettingPanne
             public void run() {
                 SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
                 mChatMsgList.add(new TextChatMsg(userName, TIME_FORMAT.format(new Date()), message, aligment));
+
                 mChatMsgAdapter.notifyDataSetChanged();
                 mChatListView.post(new Runnable() {
                     @Override
